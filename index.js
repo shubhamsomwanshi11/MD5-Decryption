@@ -4,7 +4,12 @@ const admin = require('firebase-admin');
 
 const app = express();
 const port = 3000;
-
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 // Initialize Firebase Admin SDK
 const serviceAccount = require('./serviceAccountKey.json');
 admin.initializeApp({
@@ -53,12 +58,6 @@ async function checkPassword(hashedPassword) {
   return "Not found";
 }
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
 app.post('/checkPassword', async (req, res) => {
   const { password } = req.query;
   const result = await checkPassword(password);

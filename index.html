@@ -39,7 +39,7 @@
             async function checkPassword() {
                 const password = document.getElementById('inputText').value;
                 if (password) {
-                    const response = await fetch(`http://localhost:3000/checkPassword?password=${password}`, { method: 'POST' });
+                    const response = await fetch(`https://md5-decryption-production.up.railway.app/checkPassword?password=${password}`, { method: 'POST' });
                     const data = await response.text();
                     document.getElementById('outputText').value = data;
                 }
