@@ -64,6 +64,9 @@ app.post('/checkPassword', async (req, res) => {
   const result = await checkPassword(password);
   res.send(result);
 });
+app.get('/', (req, res) => {
+  res.send("Hello shubhamsomwanshi11 ❤️");
+})
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
